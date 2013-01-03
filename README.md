@@ -44,7 +44,8 @@ prefixing has only been applied to webkit as it is not unprefixed yet).
   is optional; if not specified a random name is generated.
 
 * `CSSAnimations.remove(name)`: remove the animation named `name`.
-  `name` can also be an instance of `KeyframeAnimation`.
+  `name` can also be an instance of `KeyframeAnimation`. *Right now,
+  you can only remove animations created with `CSSAnimations.create`.*
 
 ### KeyframeAnimation
 
