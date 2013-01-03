@@ -1,4 +1,3 @@
-
 (function() {
 
     // Utility
@@ -83,6 +82,9 @@
 
         this.original.insertRule(cssRule);
         this.initKeyframes();
+        
+        // allow for chaining for ease of creation.
+        return this;
     };
 
     KeyframeAnimation.prototype.clear = function() {
