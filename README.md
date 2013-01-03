@@ -20,6 +20,13 @@ an AMD module as well as a global object.
 If not using it as an AMD module, it exports a global objects named
 `CSSAnimations` that allows you to access the API.
 
+## Browser Support
+
+This is a new library and hasn't been extensively tested. It has only
+been tested in Firefox 17+ and Chrome 23+. It should work in browsers
+that implement unprefixed CSS3 animations and webkit (special
+prefixing has only been applied to webkit as it is not unprefixed yet).
+
 ## API
 
 ### Animations
