@@ -20,6 +20,11 @@ an AMD module as well as a global object.
 If not using it as an AMD module, it exports a global objects named
 `CSSAnimations` that allows you to access the API.
 
+**NOTE:** This library searches all your stylesheets immediately when
+  it is loaded. This will cause problems if you are somehow
+  dynamically loading stylesheets after js is loaded (problems being
+  missing animations). If this is common, I will change this library.
+
 ## Browser Support
 
 This is a new library and hasn't been extensively tested. It has only
