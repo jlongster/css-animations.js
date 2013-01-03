@@ -4,86 +4,86 @@
     // Utility
 
     function findKeyframeRules(styles, func) {
-		var rules = styles.cssRules || styles.rules || [];
+        var rules = styles.cssRules || styles.rules || [];
 
-		for(var i=0; i<rules.length; i++) {
+        for(var i=0; i<rules.length; i++) {
             var rule = rules[i];
 
             if(rule.type == CSSRule.IMPORT_RULE) {
                 findKeyframeRules(rule.styleSheet, func);
             }
-			else if(rule.type === CSSRule.KEYFRAMES_RULE ||
+            else if(rule.type === CSSRule.KEYFRAMES_RULE ||
                     rule.type === CSSRule.WEBKIT_KEYFRAMES_RULE) {
                 func(rule, styles, i);
-			}
-		}
+            }
+        }
     }
 
     // Classes
 
-	function KeyframeRule(r) {
-		this.original = r;
-		this.keyText = r.keyText;
-		this.css = {};
+    function KeyframeRule(r) {
+        this.original = r;
+        this.keyText = r.keyText;
+        this.css = {};
 
         // Extract the CSS as an object
-		var rules = r.style.cssText.split(';');
+        var rules = r.style.cssText.split(';');
 
-		for(var i=0; i<rules.length; i++) {
+        for(var i=0; i<rules.length; i++) {
             var parts = rules[i].split(':');
 
             if(parts.length == 2) {
-			    var key = parts[0].replace(/^\s+|\s+$/g, '');
-			    var value = parts[1].replace(/^\s+|\s+$/g, '');
+                var key = parts[0].replace(/^\s+|\s+$/g, '');
+                var value = parts[1].replace(/^\s+|\s+$/g, '');
 
-				this.css[key] = value;
+                this.css[key] = value;
             }
-		}
-	};
+        }
+    };
 
-	function KeyframeAnimation(kf) {
-		this.original = kf;
-		this.name = kf.name;
-		this.keyframes = [];
-		this.keytexts = [];
-		this.keyframeHash = {};
+    function KeyframeAnimation(kf) {
+        this.original = kf;
+        this.name = kf.name;
+        this.keyframes = [];
+        this.keytexts = [];
+        this.keyframeHash = {};
 
-		this.initKeyframes();
-	};
+        this.initKeyframes();
+    };
 
     KeyframeAnimation.prototype.initKeyframes = function() {
-		this.keyframes = [];
-		this.keytexts = [];
-		this.keyframeHash = {};
+        this.keyframes = [];
+        this.keytexts = [];
+        this.keyframeHash = {};
 
         var rules = this.original;
 
-		for(var i=0; i<rules.cssRules.length; i++) {
-			var rule = new KeyframeRule(rules.cssRules[i]);
-			this.keyframes.push(rule);
-			this.keytexts.push(rule.keyText);
-			this.keyframeHash[rule.keyText] = rule;
-		}
+        for(var i=0; i<rules.cssRules.length; i++) {
+            var rule = new KeyframeRule(rules.cssRules[i]);
+            this.keyframes.push(rule);
+            this.keytexts.push(rule.keyText);
+            this.keyframeHash[rule.keyText] = rule;
+        }
     };
 
-	KeyframeAnimation.prototype.getKeyframeTexts = function() {
-		return this.keytexts;
-	};
+    KeyframeAnimation.prototype.getKeyframeTexts = function() {
+        return this.keytexts;
+    };
 
-	KeyframeAnimation.prototype.getKeyframe = function(text) {
-		return this.keyframeHash[text];
-	};
+    KeyframeAnimation.prototype.getKeyframe = function(text) {
+        return this.keyframeHash[text];
+    };
 
-	KeyframeAnimation.prototype.setKeyframe = function(text, css) {
-		var cssRule = text+" {";
-		for(var k in css) {
-			cssRule += k + ':' + css[k] + ';';
-		}
-		cssRule += "}";
+    KeyframeAnimation.prototype.setKeyframe = function(text, css) {
+        var cssRule = text+" {";
+        for(var k in css) {
+            cssRule += k + ':' + css[k] + ';';
+        }
+        cssRule += "}";
 
-		this.original.insertRule(cssRule);
-		this.initKeyframes();
-	};
+        this.original.insertRule(cssRule);
+        this.initKeyframes();
+    };
 
     KeyframeAnimation.prototype.clear = function() {
         for(var i=0; i<this.keyframes.length; i++) {
@@ -94,20 +94,20 @@
     function Animations() {
         this.animations = {};
 
-		var styles = document.styleSheets;
+        var styles = document.styleSheets;
         var anims = this.animations;
 
-		for(var i=0; i<styles.length; i++) {
-			try {
+        for(var i=0; i<styles.length; i++) {
+            try {
                 findKeyframeRules(styles[i], function(rule) {
                     anims[rule.name] = new KeyframeAnimation(rule);
                 });
-		    }
-			catch(e) {
+            }
+            catch(e) {
                 // Trying to interrogate a stylesheet from another
                 // domain will throw a security error
             }
-		}
+        }
     }
 
     Animations.prototype.get = function(name) {
