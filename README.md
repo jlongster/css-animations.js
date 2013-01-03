@@ -74,3 +74,27 @@ The `KeyframeRule` object represents a specific animation keyframe.
   The keys in the object are the raw CSS properties and you'll most
   likely have to quote them because they contain dashed. For example,
   `css = { 'background-color': 'red' }` and `css['background-color']`.
+
+## Examples
+
+```js
+
+// Changing an animation
+
+var anim = CSSAnimations.get('pulse');
+anim.setKeyframe('100%', { 'background-color': 'red' });
+
+// Dynamically creating and applying an animation
+
+var anim = CSSAnimations.create();
+anim.setKeyframe('0%', { left: '0px' });
+anim.setKeyframe('70%', { left: '100px' });
+anim.setKeyframe('100%', { left: '75px' });
+
+$(el).css({ 'animation-name': anim.name,
+            'animation-duration': '1s' });
+            
+$(el).on('animationend', function() {
+    CSSAnimations.remove(anim.name);
+});
+```
