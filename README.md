@@ -58,7 +58,8 @@ The `KeyframeAnimation` object represents a CSS3 animation.
 * `KeyframeAnimation.setKeyframe(text, css)`: set the CSS for a
   specified keyframe. `text` is a string the represents the keyframes,
   like `"10%"`, and `css` is a javascript object with key/values
-  representing the CSS to set.
+  representing the CSS to set. It returns the same `KeyframeAnimation`
+  object so you can chain it.
 
 * `KeyframeAnimation.clear()`: Remove all keyframes from this animation.
 
