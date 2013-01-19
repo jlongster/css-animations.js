@@ -12,6 +12,12 @@ You can add, modify, and remove individual keyframes from existing
 animations, in addition to creating and deleting animations
 themselves.
 
+## Demos
+
+* Adding a keyframe to an existing animation: http://jsbin.com/esocaw/1/edit
+* Modifying a keyframe of an existing animation: http://jsbin.com/esocaw/7/edit
+* Creating a new animation: http://jsbin.com/esocaw/9/edit
+
 ## Usage
 
 Download `css-animations.js` to your project and load it. It works as
