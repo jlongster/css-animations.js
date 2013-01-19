@@ -99,9 +99,9 @@ anim.setKeyframe('100%', { 'background-color': 'red' });
 // Dynamically creating and applying an animation
 
 var anim = CSSAnimations.create();
-anim.setKeyframe('0%', { left: '0px' });
-anim.setKeyframe('70%', { left: '100px' });
-anim.setKeyframe('100%', { left: '75px' });
+anim.setKeyframe('0%', { transform: 'translateY(0)' });
+anim.setKeyframe('70%', { transform: 'translateY(50px)' });
+anim.setKeyframe('100%', { transform: 'translateY(150px)' });
 
 $(el).css({ 'animation-name': anim.name,
             'animation-duration': '1s' });
