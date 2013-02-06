@@ -13,9 +13,9 @@ themselves.
 
 ## Demos
 
-* Adding a keyframe to an existing animation: http://jsbin.com/esocaw/19/edit
-* Modifying a keyframe of an existing animation: http://jsbin.com/esocaw/20/edit
-* Creating a new animation: http://jsbin.com/esocaw/22/edit
+* Adding a keyframe to an existing animation: http://jsbin.com/esocaw/19/
+* Modifying a keyframe of an existing animation: http://jsbin.com/esocaw/20/
+* Creating a new animation: http://jsbin.com/esocaw/22/
 
 ## Usage
 
