@@ -12,6 +12,7 @@
                 findKeyframeRules(rule.styleSheet, func);
             }
             else if(rule.type === CSSRule.KEYFRAMES_RULE ||
+                    rule.type === CSSRule.MOZ_KEYFRAMES_RULE ||
                     rule.type === CSSRule.WEBKIT_KEYFRAMES_RULE) {
                 func(rule, styles, i);
             }
