@@ -53,14 +53,14 @@ prefixing has only been applied to webkit as it is not unprefixed yet).
   ```js
   // Create with name and keyframes
   var anim = CSSAnimations.create('foo', {
-    '0%': { 'background-color': 'red' },
-    '100%': { 'background-color': 'blue' }
+      '0%': { 'background-color': 'red' },
+      '100%': { 'background-color': 'blue' }
   });
 
   // Create with keyframes, names is randomly generated
   var anim = CSSAnimations.create({
-    '0%': { 'background-color': 'red' },
-    '100%': { 'background-color': 'blue' }
+      '0%': { 'background-color': 'red' },
+      '100%': { 'background-color': 'blue' }
   });
   
   // Create with just name and no keyframes
@@ -102,8 +102,8 @@ The `KeyframeAnimation` object represents a CSS3 animation.
   
   ```js
   anim.setKeyframes({
-    '10%': { 'background-color': '#333333' },
-    '20%': { 'background-color': '#666666' },
+      '10%': { 'background-color': '#333333' },
+      '20%': { 'background-color': '#666666' },
   });
   ```
 
