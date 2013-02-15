@@ -44,9 +44,31 @@ prefixing has only been applied to webkit as it is not unprefixed yet).
 * `CSSAnimations.get(name)`: return a `KeyframeAnimation` object
   representing the animation named `name`
 
-* `CSSAnimations.create(name)`: create a new animation named `name`
-  and return the newly constructed `KeyframeAnimation` object. `name`
-  is optional; if not specified a random name is generated.
+* `CSSAnimations.create(name, frames)`: create a new animation named
+  `name` and return the newly constructed `KeyframeAnimation` object.
+  If `frames` is suppled, add them to the new animation with
+  `setKeyframes` (see below). `name` is optional; if not specified a
+  random name is generated. `frames` is also optional.
+  
+  ```js
+  // Create with name and keyframes
+  var anim = CSSAnimations.create('foo', {
+    '0%': { 'background-color': 'red' },
+    '100%': { 'background-color': 'blue' }
+  });
+
+  // Create with keyframes, names is randomly generated
+  var anim = CSSAnimations.create({
+    '0%': { 'background-color': 'red' },
+    '100%': { 'background-color': 'blue' }
+  });
+  
+  // Create with just name and no keyframes
+  var anim = CSSAnimations.create('foo');
+  
+  // Create with random name and no keyframes
+  var anim = CSSAnimations.create();
+  ```
 
 * `CSSAnimations.remove(name)`: remove the animation named `name`.
   `name` can also be an instance of `KeyframeAnimation`. *Right now,
@@ -117,8 +139,7 @@ anim.setKeyframe('100%', { 'background-color': 'red' });
 
 // Dynamically creating and applying an animation
 
-var anim = CSSAnimations.create();
-anim.setKeyframes({
+var anim = CSSAnimations.create({
     '0%': { transform: 'translateY(0)' },
     '70%': { transform: 'translateY(50px)' },
     '100%': { transform: 'translateY(150px)' }

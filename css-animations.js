@@ -135,8 +135,14 @@
         return this.dynamicSheet;
     };
 
-    Animations.prototype.create = function(name) {
+    Animations.prototype.create = function(name, frames) {
         var styles = this.getDynamicSheet();
+
+        // frames can also be passed as the first parameter
+        if(typeof name === 'object') {
+            frames = name;
+            name = null;
+        }
 
         if(!name) {
             name = 'anim' + Math.floor(Math.random() * 100000);
@@ -157,8 +163,14 @@
             }
         }
 
-        this.animations[name] = new KeyframeAnimation(styles.cssRules[idx]);
-        return this.animations[name];
+        var anim = new KeyframeAnimation(styles.cssRules[idx]);
+        this.animations[name] = anim;
+
+        if(frames) {
+            anim.setKeyframes(frames);
+        }
+
+        return anim;
     };
 
     Animations.prototype.remove = function(name) {

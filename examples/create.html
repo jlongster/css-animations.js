@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <div id="foo">hello</div>
+    <div id="bar">hello</div>
+
+    <script src="../css-animations.js"></script>
+    <script>
+      // Creating anonymous with keyframes
+      var anim = CSSAnimations.create({
+          '0%': {
+              'background-color': '#2299aa'
+          },
+          '100%': {
+              'background-color': '#000000',
+              'color': 'white'
+          }
+      });
+
+      // Creating by name
+      var anim2 = CSSAnimations.create('anim2', {
+          '0%': {
+              'background-color': '#aa9922'
+          },
+          '100%': {
+              'background-color': '#333333',
+              'color': 'white'
+          }
+      });
+
+      var foo = document.getElementById('foo');
+      var bar = document.getElementById('bar');
+      foo.style.animationName = anim.name;
+      foo.style.animationDuration = '5s';
+      bar.style.animationName = anim2.name;
+      bar.style.animationDuration = '5s';
+
+      // webkit (all other browsers are unprefixed, I think)
+      foo.style.webkitAnimationName = anim.name;
+      foo.style.webkitAnimationDuration = '5s';
+      bar.style.webkitAnimationName = anim2.name;
+      bar.style.webkitAnimationDuration = '5s';
+    </script>
+  </body>
+</html>
