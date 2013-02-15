@@ -59,12 +59,31 @@ The `KeyframeAnimation` object represents a CSS3 animation.
 * `KeyframeAnimation.getKeyframe(text)`: return a `KeyframeRule`
   object representing the animation at the specified keyframe. `text`
   is a string that represents the keyframe, such as `"10%"`.
+  
+  ```js
+  var rule = anim.getKeyframe('10%');
+  ```
 
 * `KeyframeAnimation.setKeyframe(text, css)`: set the CSS for a
   specified keyframe. `text` is a string the represents the keyframes,
   like `"10%"`, and `css` is a javascript object with key/values
   representing the CSS to set. It returns the same `KeyframeAnimation`
   object so you can chain it.
+
+  ```js
+  anim.setKeyframe('10%': { 'background-color': '#333333' });
+  ```
+
+* `KeyframeAnimation.setKeyframes(frames)`: Same as `setKeyframe`, but
+  sets multiple keyframes at once. `frames` is an object with the
+  percentage values, like `10%`, as keys and css as values.
+  
+  ```js
+  anim.setKeyframes({
+    '10%': { 'background-color': '#333333' },
+    '20%': { 'background-color': '#666666' },
+  });
+  ```
 
 * `KeyframeAnimation.clear()`: Remove all keyframes from this animation.
 
@@ -99,9 +118,11 @@ anim.setKeyframe('100%', { 'background-color': 'red' });
 // Dynamically creating and applying an animation
 
 var anim = CSSAnimations.create();
-anim.setKeyframe('0%', { transform: 'translateY(0)' });
-anim.setKeyframe('70%', { transform: 'translateY(50px)' });
-anim.setKeyframe('100%', { transform: 'translateY(150px)' });
+anim.setKeyframes({
+    '0%': { transform: 'translateY(0)' },
+    '70%': { transform: 'translateY(50px)' },
+    '100%': { transform: 'translateY(150px)' }
+});
 
 $(el).css({ 'animation-name': anim.name,
             'animation-duration': '1s' });

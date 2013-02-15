@@ -88,6 +88,12 @@
         return this;
     };
 
+    KeyframeAnimation.prototype.setKeyframes = function(obj) {
+        for(var k in obj) {
+            this.setKeyframe(k, obj[k]);
+        }
+    };
+
     KeyframeAnimation.prototype.clear = function() {
         for(var i=0; i<this.keyframes.length; i++) {
             this.original.deleteRule(this.keyframes[i].keyText);
