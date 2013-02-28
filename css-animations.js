@@ -81,7 +81,19 @@
         }
         cssRule += "}";
 
-        this.original.insertRule(cssRule);
+        // The latest spec says that it should be appendRule, not insertRule.
+        // Browsers also vary in the semantics of this, whether or not the new
+        // rules are merged in with previous ones at the same keyframe or if they
+        // are simply replaced. Need to look into that more.
+        // 
+        // https://github.com/jlongster/css-animations.js/issues/4
+        if('appendRule' in this.original) {
+            this.original.appendRule(cssRule);
+        }
+        else {
+            this.original.insertRule(cssRule);
+        }
+
         this.initKeyframes();
         
         // allow for chaining for ease of creation.
